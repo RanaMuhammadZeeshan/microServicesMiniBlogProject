@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import App from '../components/appComponent/app'
+import { fetchPosts } from './api/posts'
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
     <div>
       <Head>
@@ -13,8 +14,19 @@ export default function Home() {
       </Head>
 
       <main>
-        <App />
+        <App posts={posts} />
       </main>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const response = await fetchPosts()
+
+  const posts = response
+  return {
+    props: {
+      posts,
+    },
+  }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import createPost from '../../pages/api/posts'
+import { createPost } from '../../pages/api/posts'
 
-export default function PostCreate() {
+const PostCreate = () => {
   const [title, setTitle] = useState('')
 
   const onSubmit = async (event) => {
@@ -29,3 +29,5 @@ export default function PostCreate() {
     </div>
   )
 }
+
+export default PostCreate
