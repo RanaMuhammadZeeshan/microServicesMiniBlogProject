@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import { createPost } from '../../pages/api/posts'
+import { createPost, fetchPosts } from '../../pages/api/posts'
 
-const PostCreate = () => {
+const PostCreate = ({ getPosts }) => {
   const [title, setTitle] = useState('')
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    const result = await createPost({ title })
-    console.log(result)
+    await createPost({ title })
+
+    await getPosts()
 
     setTitle('')
   }
