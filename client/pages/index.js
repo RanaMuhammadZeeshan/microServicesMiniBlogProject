@@ -1,8 +1,7 @@
 import axios from 'axios'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import App from '../components/appComponent/app'
-import { fetchPosts } from './api/posts'
 
 export default function Home({ posts }) {
   const [postsList, setPostsList] = useState(posts)
@@ -31,7 +30,6 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps() {
-  // const response = await fetchPosts()
   const response = await axios.get('http://localhost:4000/posts')
 
   const posts = response.data || {}
