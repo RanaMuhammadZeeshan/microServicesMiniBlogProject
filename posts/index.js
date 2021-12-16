@@ -40,8 +40,6 @@ app.post('/posts', async (req, res) => {
 })
 
 app.post('/events', (req, res) => {
-  console.log('Revicieved an event', req.body.type)
-
   res.send({})
 })
 
