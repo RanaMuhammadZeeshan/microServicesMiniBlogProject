@@ -7,9 +7,14 @@ export default function Home({ posts }) {
   const [postsList, setPostsList] = useState(posts)
 
   const getPosts = async () => {
-    const posts = await axios.get('http://localhost:4000/posts')
+    try {
+      const posts = await axios.get('http://localhost:4002/posts')
 
-    setPostsList(posts.data)
+      setPostsList(posts.data)
+    } catch (error) {
+      console.log('hereeror')
+      setPostsList([])
+    }
   }
 
   return (
@@ -30,12 +35,22 @@ export default function Home({ posts }) {
 }
 
 export async function getServerSideProps() {
-  const response = await axios.get('http://localhost:4000/posts')
+  try {
+    const response = await axios.get('http://localhost:4002/posts')
+    const posts = response.data || {}
 
-  const posts = response.data || {}
-  return {
-    props: {
-      posts,
-    },
+    return {
+      props: {
+        posts,
+      },
+    }
+  } catch (error) {
+    if (error) {
+      return {
+        props: {
+          posts: {},
+        },
+      }
+    }
   }
 }
